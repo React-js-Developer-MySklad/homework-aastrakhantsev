@@ -1,0 +1,81 @@
+header {
+    @apply flex;
+    height: 58px;
+    padding-top: 12px;
+}
+
+main {
+    min-height: calc(100vh - 112px);
+    margin-top:16px;
+}
+
+footer {
+    @apply text-xs font-medium text-center;
+    font-size: 12px;
+    height: 38px;
+    padding: 10px;
+}
+
+thead > tr {
+    @apply text-xs uppercase bg-gray-50 text-gray-500;
+    height:50px;
+}
+
+tbody > tr {
+    height:54px;
+}
+
+
+td,th {
+    @apply px-6 py-4
+}
+
+tr {
+    @apply border-b
+}
+
+td:nth-child(1) {
+    @apply font-normal text-gray-900
+}
+
+td:nth-child(2) {
+    @apply font-normal text-gray-500
+}
+
+td:nth-child(3) {
+    @apply font-semibold text-gray-900
+}
+
+td:nth-child(4) {
+    @apply font-medium 
+}
+
+.button-add-data {
+    @apply flex text-center text-sm text-white bg-blue-700 font-medium rounded-lg;
+    width:102px;
+    height:34px;
+}
+
+.payment-from {
+    @apply font-semibold
+}
+
+.status {
+    @apply font-medium me-2 px-2.5 py-1.5 rounded
+}
+
+.status-green {
+    @apply status bg-green-100 text-green-800 
+}
+
+.status-purple {
+    @apply status bg-purple-100 text-purple-800 
+}
+
+.status-red {
+    @apply status bg-red-100 text-red-800 
+}
+
+.modal-input {
+    @apply bg-gray-50 border-gray-300 text-gray-500
+}
