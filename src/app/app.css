@@ -16,43 +16,42 @@ footer {
     padding: 10px;
 }
 
-thead > tr {
+table.maintab thead tr {
     @apply text-xs uppercase bg-gray-50 text-gray-500;
     height:50px;
+
+    th {
+	@apply px-6 py-4
+    }
 }
 
-tbody > tr {
+table.maintab tbody tr {
     height:54px;
-}
+    @apply border-b;
 
+    td {
+	@apply px-6 py-4
+    }
 
-td,th {
-    @apply px-6 py-4
-}
+    td:nth-child(1) {
+	@apply font-normal text-gray-900
+    }
 
-tr {
-    @apply border-b
-}
+    td:nth-child(2) {
+	@apply font-normal text-gray-500
+    }
 
-td:nth-child(1) {
-    @apply font-normal text-gray-900
-}
+    td:nth-child(3) {
+	@apply font-semibold text-gray-900
+    }
 
-td:nth-child(2) {
-    @apply font-normal text-gray-500
-}
-
-td:nth-child(3) {
-    @apply font-semibold text-gray-900
-}
-
-td:nth-child(4) {
-    @apply font-medium 
+    td:nth-child(4) {
+	@apply font-medium 
+    }
 }
 
 .button-add-data {
     @apply flex text-center text-sm text-white bg-blue-700 font-medium rounded-lg;
-    width:102px;
     height:34px;
 }
 
