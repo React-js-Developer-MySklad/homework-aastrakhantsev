@@ -1,0 +1,8 @@
+
+input {
+    @apply rounded-sm bg-gray-50 border-gray-300 text-gray-500 w-full
+}
+
+div > span {
+    @apply text-sm font-medium text-gray-500
+}
