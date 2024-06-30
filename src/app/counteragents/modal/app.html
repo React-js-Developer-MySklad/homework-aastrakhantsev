@@ -1,0 +1,35 @@
+    <div class="relative" style="width:416px">
+        <div class="relative bg-white rounded-lg p-4">
+            <div class="flex px-2">
+                <button type="button" class="text-gray-400 bg-transparent rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="default-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="p-2 text-xl font-semibold text-gray-500">Контрагент</div>
+	    <input type="hidden" id="modal-id">
+            <div class="p-2">
+                <span>Наименование</span>
+                <input type="text" id="modal-name">
+            </div>
+            <div class="p-2">
+                <span>ИНН</span>
+                <input type="text" id="modal-inn">
+            </div>
+            <div class="p-2">
+                <span>Адрес</span>
+                <input type="text" id="modal-address">
+            </div>
+            <div class="p-2">
+                <span>КПП</span>
+                <input type="text" id="modal-kpp">
+            </div>
+
+            <div class="flex p-2">
+                <button id="modal-create" type="button" class="text-white bg-blue-700 font-medium rounded-lg text-sm px-2 py-2.5 text-center w-full">Сохранить</button>
+                <button id="modal-close" data-modal-hide="default-modal" type="button" class="text-white bg-blue-700 font-medium rounded-lg text-sm px-2 py-2.5 text-center w-full">Отмена</button>
+            </div>
+        </div>
+    </div>
