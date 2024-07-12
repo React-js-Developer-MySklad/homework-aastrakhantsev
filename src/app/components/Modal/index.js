@@ -1,5 +1,5 @@
-import html from './app.html';
-import './app.css';
+import html from './index.html';
+import './styles.css';
 
 let fnOnClose = () => { };
 

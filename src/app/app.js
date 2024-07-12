@@ -1,8 +1,8 @@
 import html from "./app.html";
 import './app.css'
 
-import { initTable, updateTable } from './counteragents/table/app';
-import { initModal, updateModal } from './counteragents/modal/app';
+import { initTable, updateTable } from './components/Table';
+import { initModal, updateModal } from './components/Modal';
 
 import myData from "./data.json";
 
@@ -16,9 +16,7 @@ function onSaveNew(data) {
     redrawTable();
 }
 
-function indexById(id) {
-    return myData.findIndex(el => el.id == id);
-}
+const indexById = (id) => myData.findIndex(el => el.id == id);
 
 function onDeleteRow(id) {
     myData.splice(indexById(id), 1);
