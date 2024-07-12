@@ -8,160 +8,19 @@
         <a href="http://www.moysklad.ru/"><img src="assets/logo.svg"></a>
     </div>
     <div>
-        <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="button-add-data" type="button">
+        <button id="data-modal" data-modal-target="default-modal" data-modal-toggle="default-modal" class="button-add-data" type="button">
             <img src="assets/plus.svg" style="padding:10px">
             <span style="padding-top:6px">Add data</span>
         </button>
+	<button id="show-modal" data-modal-target="default-modal" data-modal-toggle="default-modal"></button>
     </div>
 </header>
 
 <main>
-    <div>
-        <table class="w-full text-sm text-left maintab">
-            <thead>
-            <tr>
-                <th>
-                    Transaction
-                </th>
-                <th>
-                    Date & Time
-                </th>
-                <th>
-                    Amount
-                </th>
-                <th>
-                    Status
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    Payment from <span class="payment-from">Bonnie Green</span>
-                </td>
-                <td>
-                    Apr 23, 2021
-                </td>
-                <td>
-                    $2300
-                </td>
-                <td>
-                    <span class="status-green">Completed</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Payment refund to <span class="payment-from">#00910
-                </td>
-                <td>
-                    Apr 23, 2021
-                </td>
-                <td>
-                    -$670
-                </td>
-                <td>
-                    <span class="status-green">Completed</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Payment failed from <span class="payment-from">#087651</span>
-                </td>
-                <td>
-                    Apr 18, 2021
-                </td>
-                <td>
-                    $234
-                </td>
-                <td>
-                    <span class="status-red">Cancelled</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Payment from <span class="payment-from">Lana Byrd</span>
-                </td>
-                <td>
-                    Apr 15, 2021
-                </td>
-                <td>
-                    $5000
-                </td>
-                <td>
-                    <span class="status-purple">In progress</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Payment from <span class="payment-from">Jose Leos</span>
-                </td>
-                <td>
-                    Apr 15, 2021
-                </td>
-                <td>
-                    $2300
-                </td>
-                <td>
-                    <span class="status-green">Completed</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Payment from <span class="payment-from">THEMSBERG LLC</span>
-                </th>
-                <td>
-                    Apr 11, 2021
-                </td>
-                <td>
-                    $560
-                </td>
-                <td>
-                    <span class="status-green">Completed</span>
-                </td>
-            </tr>
-
-            </tbody>
-        </table>
-    </div>
+    <div id="default-table"></div>
 </main>
 
-<div id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative" style="width:416px">
-        <div class="relative bg-white rounded-lg p-4">
-            <div class="flex px-2">
-                <button type="button" class="text-gray-400 bg-transparent rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="default-modal">
-                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                    </svg>
-                </button>
-            </div>
-
-            <div class="p-2 text-xl font-semibold text-gray-500">Sign in to out platform</div>
-            <div class="p-2">
-                <span class="text-sm font-medium text-gray-500">Your email</span>
-                <input type="text" class="w-full modal-input rounded-lg">
-            </div>
-            <div class="p-2">
-                <span class="text-sm font-medium text-gray-900">Password</span>
-                <input type="password" class="w-full modal-input rounded-lg">
-            </div>
-            <div class="flex p-2">
-                <div class="flex-grow">
-                    <input type="checkbox" class="rounded modal-input">
-                    <span class="p4 text-sm font-medium">Remember me</span>
-                </div>
-                <a href="#" class="text-blue-500" onclick="return false">Lost password?</a>
-            </div>
-            <div class="flex p-2">
-                <button data-modal-hide="default-modal" type="button" class="text-white bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center w-full">Create account</button>
-            </div>
-            <div class="p-2 text-sm font-medium">
-                Not registered?
-                <a href="#" class="text-blue-500" onclick="return false">Create account</a>
-            </div>
-        </div>
-    </div>
-</div>
+<div id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"></div>
 <footer>
     &copy; 2007-2024, ООО "Логнекс"
 </footer>
