@@ -1,10 +1,18 @@
-import React from 'react';
+import { React, useContext } from 'react';
+import { ApiContext } from '../../ApiContext.tsx';
 
 import './styles.css';
 import html from './index.html';
 
 export const Table = (props) => {
     const {rows, callForRow, saveRow, deleteRow, ...rest} = props;
+    const { deleteOne } = useContext(ApiContext);
+
+    const onDelete = (e, id, index) => {
+	deleteOne(id).then(r => deleteRow(index));
+	e.stopPropagation();
+    }
+
     return (
 	<table className="w-full text-sm text-left">
             <thead>
@@ -31,7 +39,7 @@ export const Table = (props) => {
 		<td>{row.inn}</td>
 		<td>{row.address}</td>
 		<td>{row.kpp}</td>
-		<td><button type="button" onClick={e => { deleteRow(index); e.stopPropagation();} }>Удалить</button></td>
+		<td><button type="button" onClick={e => onDelete(e, row.id, index) }>Удалить</button></td>
 	    </tr>
 	    ))}
             </tbody>

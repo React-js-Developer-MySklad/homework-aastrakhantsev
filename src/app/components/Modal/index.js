@@ -1,8 +1,10 @@
 import html from './index.html';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { ApiContext } from '../../ApiContext.tsx';
 import './styles.css';
 
 export const Modal = (props) => {
+    const { saveOne } = useContext(ApiContext);
     const { hideModal, initialData, ...rest } = props;
     const [name, setName] = useState(initialData.row.name);
     const [inn, setInn] = useState(initialData.row.inn);
@@ -22,14 +24,20 @@ export const Modal = (props) => {
 }
 
     function clickSave() {
-	if (validate())
-	initialData.saveRow(initialData.index, {
-	    id: initialData.id,
-	    name: name,
-	    inn: inn,
-	    address: address,
-	    kpp: kpp
-	});
+	if (validate()) {
+	    let obj = {
+		id: initialData.row.id,
+		name: name,
+		inn: inn,
+		address: address,
+		kpp: kpp
+	    };
+	    
+	    saveOne(obj).then(r => {
+		obj.id = r.id;
+		initialData.saveRow(initialData.index, obj);
+	    });
+	}
     }
 
     return  (
