@@ -19,7 +19,7 @@ export const Modal = (props) => {
 	    return false;
 	}
     return true;
-}
+    }
 
     function clickSave() {
 	if (validate())
