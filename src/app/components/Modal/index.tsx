@@ -1,15 +1,27 @@
 import html from './index.html';
 import { useState } from 'react';
 import './styles.css';
+import { DataType } from '../../app.tsx';
 
-export const Modal = (props) => {
-    const { hideModal, initialData, ...rest } = props;
+interface IInitialData {
+    index: int;
+    id: int;
+    row: DataType;
+}
+
+interface ModalProps {
+    hideModal: () => void;
+    initialData: IInitalData;
+}
+
+export const Modal = (props: ModalProps) => {
+    const { hideModal, initialData } = props;
     const [name, setName] = useState(initialData.row.name);
     const [inn, setInn] = useState(initialData.row.inn);
     const [address, setAddress] = useState(initialData.row.address);
     const [kpp, setKpp] = useState(initialData.row.kpp);
 
-    function validate() {
+    const validate = () => {
 	if (! /\d{12}/.test(inn)) {
 	    alert("ИНН должен содержать 12 цифр");
 	    return false;
@@ -21,7 +33,7 @@ export const Modal = (props) => {
     return true;
     }
 
-    function clickSave() {
+    const clickSave = () => {
 	if (validate())
 	initialData.saveRow(initialData.index, {
 	    id: initialData.id,
@@ -33,7 +45,7 @@ export const Modal = (props) => {
     }
 
     return  (
-    <>
+    <div>
     <div id="default-modal" tabIndex="-1" className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div className="relative" style={{width:'416px', margin: 'auto', marginTop: 'calc(50vh - 300px)'}}>
         <div className="relative bg-white rounded-lg p-4">
@@ -71,6 +83,6 @@ export const Modal = (props) => {
     </div>
     </div>
     <div modal-backdrop="" className="bg-gray-900/50 dark:bg-gray-900/80 fixed inset-0 z-40"></div>
-    </>
+    </div>
     );
 };

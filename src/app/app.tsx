@@ -8,6 +8,14 @@ import { Modal } from './components/Modal';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 
+export interface DataType {
+    id: int;
+    name: string;
+    inn: string;
+    addr: string;
+    kpp: string;
+}
+
 import myData from "./data.json";
 
 let nextId = 100;
@@ -17,12 +25,12 @@ export const App = () => {
     const [rows, setRows] = useState(myData);
     const [modalState, setModalState] = useState({index:-1, row: myData[0]});
 
-    function callForRow(row, index, saveRow) {
+    const callForRow = (row: DataType, index: int, saveRow: (int, DataType) => void) => {
 	setModalState({index: index, row: row, saveRow: saveRow});
 	showModal(true);
     }
 
-    function saveRow(index, row) {
+    const saveRow = (index: int, row: DataType) => {
 	if (index < 0) {
 	    setRows([...rows, row]);
 	} else {
@@ -33,7 +41,7 @@ export const App = () => {
 	showModal(false);
     }
 
-    function deleteRow(index) {
+    const deleteRow = (index: int) => {
 	const arr = [...rows];
 	arr.splice(index, 1);
 	setRows(arr);

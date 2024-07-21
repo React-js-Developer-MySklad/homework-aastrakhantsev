@@ -2,8 +2,12 @@ import React from 'react';
 import { default as logo } from '../../assets/logo.svg';
 import { default as plus } from '../../assets/plus.svg';
 
-export const Header = (props) => {
-    const {onAddData, ...rest } = props;
+interface HeaderProps {
+    onAddData: () => void;
+}
+
+export const Header = (props: HeaderProps) => {
+    const {onAddData } = props;
     return (
 	<header>
 	    <div className="flex-grow">

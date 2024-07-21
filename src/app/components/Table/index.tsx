@@ -2,9 +2,17 @@ import React from 'react';
 
 import './styles.css';
 import html from './index.html';
+import { DataType } from '../../app.tsx';
 
-export const Table = (props) => {
-    const {rows, callForRow, saveRow, deleteRow, ...rest} = props;
+interface TableProps {
+    rows: DataType[],
+    callForRow: (DataType, int, save: () => void) => void;
+    saveRow: (int, DataType) => void;
+    deleteRow: (int) => void;
+};
+
+export const Table = (props: TableProps) => {
+    const {rows, callForRow, saveRow, deleteRow} = props;
     return (
 	<table className="w-full text-sm text-left">
             <thead>
