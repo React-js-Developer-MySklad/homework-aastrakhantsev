@@ -10,10 +10,17 @@ import { Footer } from './components/Footer';
 import { loadAll, saveOne, deleteOne } from './service/Api/index.ts';
 import { ApiContext } from './ApiContext.tsx';
 
+export interface DataType {
+    id: int;
+    name: string;
+    inn: string;
+    addr: string;
+    kpp: string;
+}
+
 let nextId = 100;
 
 export const App = () => {
-    //const myData = loadAll();
     const [modalVisible, showModal] = useState(false);
     const [rows, setRows] = useState([]);
     const [modalState, setModalState] = useState({});
@@ -22,18 +29,17 @@ export const App = () => {
     loadAll().then(r => {
 	setRows(r);
 	setModalState({index:-1, row: r[0]});
-console.log(r);
     });
     }
 
     useEffect(callLoader, []);
 
-    function callForRow(row, index, saveRow) {
+    const callForRow = (row: DataType, index: int, saveRow: (int, DataType) => void) => {
 	setModalState({index: index, row: row, saveRow: saveRow});
 	showModal(true);
     }
 
-    function saveRow(index, row) {
+    const saveRow = (index: int, row: DataType) => {
 	if (index < 0) {
 	    setRows([...rows, row]);
 	} else {
@@ -44,19 +50,19 @@ console.log(r);
 	showModal(false);
     }
 
-    function deleteRow(index) {
+    const deleteRow = (index: int) => {
 	const arr = [...rows];
 	arr.splice(index, 1);
 	setRows(arr);
     }
     // 
 
-    return <ApiContext.Provider value={{ loadAll, deleteOne, saveOne }}>
+    return <ApiContext.Provider value={{ loadAll, deleteOne, saveOne, callForRow, deleteRow, saveRow, showModal }}>
 	<Header onAddData={() => { callForRow({id: 100}, -1, saveRow); } }/>
 	<main>
-	<Table rows={rows} callForRow={callForRow} saveRow={saveRow} deleteRow={deleteRow}/>
+	<Table rows={rows} />
 	</main>
-	{ modalVisible ? <Modal hideModal={() => showModal(false)} initialData={modalState} /> : null }
+	{ modalVisible ? <Modal initialData={modalState} /> : null }
 	<Footer/>
     </ApiContext.Provider>;
 };

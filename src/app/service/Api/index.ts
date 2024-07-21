@@ -1,3 +1,4 @@
+import { DataType } from '../../app.tsx';
 
 const URL = "http://localhost:3000/counterparty";
 
@@ -11,7 +12,7 @@ export const deleteOne = (id) => {
     });
 }
 
-export const saveOne = (obj) => {
+export const saveOne = (obj: DataType) => {
     return fetch(obj.id ? URL + "/" + obj.id : URL, {
         method: obj.id ? "PUT" : "POST",
         headers: {

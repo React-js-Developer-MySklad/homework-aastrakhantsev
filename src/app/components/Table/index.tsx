@@ -3,10 +3,18 @@ import { ApiContext } from '../../ApiContext.tsx';
 
 import './styles.css';
 import html from './index.html';
+import { DataType } from '../../app.tsx';
 
-export const Table = (props) => {
-    const {rows, callForRow, saveRow, deleteRow, ...rest} = props;
-    const { deleteOne } = useContext(ApiContext);
+interface TableProps {
+    rows: DataType[],
+    //callForRow: (DataType, int, save: () => void) => void;
+    //saveRow: (int, DataType) => void;
+    //deleteRow: (int) => void;
+};
+
+export const Table = (props: TableProps) => {
+    const {rows } = props;
+    const { callForRow, saveRow, deleteRow, deleteOne } = useContext(ApiContext);
 
     const onDelete = (e, id, index) => {
 	deleteOne(id).then(r => deleteRow(index));
@@ -33,7 +41,7 @@ export const Table = (props) => {
             </tr>
             </thead>
             <tbody>
-	    {rows.map((row, index) => (
+	    {rows.map((row: DataType, index: int) => (
 	    <tr key={index} onClick={() => callForRow(row, index, saveRow)}>
 		<td>{row.name}</td>
 		<td>{row.inn}</td>
