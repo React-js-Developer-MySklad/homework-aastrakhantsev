@@ -18,8 +18,6 @@ export interface DataType {
     kpp: string;
 }
 
-let nextId = 100;
-
 export const App = () => {
     const [modalVisible, showModal] = useState(false);
     const [rows, setRows] = useState([]);
@@ -34,8 +32,8 @@ export const App = () => {
 
     useEffect(callLoader, []);
 
-    const callForRow = (row: DataType, index: int, saveRow: (int, DataType) => void) => {
-	setModalState({index: index, row: row, saveRow: saveRow});
+    const callForRow = (row: DataType, index: int) => {
+	setModalState({index: index, row: row});
 	showModal(true);
     }
 
@@ -58,7 +56,7 @@ export const App = () => {
     // 
 
     return <ApiContext.Provider value={{ loadAll, deleteOne, saveOne, callForRow, deleteRow, saveRow, showModal }}>
-	<Header onAddData={() => { callForRow({id: 100}, -1, saveRow); } }/>
+	<Header onAddData={() => { callForRow({}, -1); } }/>
 	<main>
 	<Table rows={rows} />
 	</main>

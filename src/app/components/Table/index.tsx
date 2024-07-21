@@ -7,14 +7,11 @@ import { DataType } from '../../app.tsx';
 
 interface TableProps {
     rows: DataType[],
-    //callForRow: (DataType, int, save: () => void) => void;
-    //saveRow: (int, DataType) => void;
-    //deleteRow: (int) => void;
 };
 
 export const Table = (props: TableProps) => {
     const {rows } = props;
-    const { callForRow, saveRow, deleteRow, deleteOne } = useContext(ApiContext);
+    const { callForRow, deleteRow, deleteOne } = useContext(ApiContext);
 
     const onDelete = (e, id, index) => {
 	deleteOne(id).then(r => deleteRow(index));
@@ -42,7 +39,7 @@ export const Table = (props: TableProps) => {
             </thead>
             <tbody>
 	    {rows.map((row: DataType, index: int) => (
-	    <tr key={index} onClick={() => callForRow(row, index, saveRow)}>
+	    <tr key={index} onClick={() => callForRow(row, index)}>
 		<td>{row.name}</td>
 		<td>{row.inn}</td>
 		<td>{row.address}</td>
