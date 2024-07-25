@@ -4,10 +4,22 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const {CleanWebpackPlugin} = require("clean-webpack-plugin");
 
 module.exports = {
-    entry: './src/main.js',
+    entry: './src/main.tsx',
+    resolve: {
+	extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    },
     module: {
 
         rules: [
+	    {
+                // регулярное выражение для поиска js, jsx, ts, tsx
+                test: /\.(js|ts)x?$/,
+                // используем лоадер babel-loader
+                use: ['babel-loader'],
+                // исключаем попадание node_modules в лоадер
+                // https://webpack.js.org/loaders/babel-loader/#babel-loader-is-slow
+                exclude: /node_modules/
+            },
             {
                 test: /\.css$/i,
                 include: [
@@ -30,6 +42,10 @@ module.exports = {
             {
                 test: /\.html$/i,
                 loader: "html-loader",
+            },
+            {
+                test: /\.svg$/i,
+                type: "asset/resource",
             },
         ],
     },
