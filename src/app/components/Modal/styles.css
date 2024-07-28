@@ -6,3 +6,7 @@ input {
 div > span {
     @apply text-sm font-medium text-gray-500
 }
+
+.errorText {
+    @apply text-xs font-bold text-red-600
+}
