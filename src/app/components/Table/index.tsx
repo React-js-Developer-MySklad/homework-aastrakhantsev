@@ -1,17 +1,11 @@
 import { React, useContext } from 'react';
-import { ApiContext } from '../../ApiContext.tsx';
 
 import './styles.css';
 import html from './index.html';
-import { DataType } from '../../app.tsx';
+import { DataType, useApi } from '../../app.tsx';
 
-interface TableProps {
-    rows: DataType[],
-};
-
-export const Table = (props: TableProps) => {
-    const {rows } = props;
-    const { callForRow, deleteRow, deleteOne } = useContext(ApiContext);
+export const Table = () => {
+    const { callForRow, deleteRow, deleteOne, rows } = useApi();
 
     const onDelete = (e, id, index) => {
 	deleteOne(id).then(r => deleteRow(index));

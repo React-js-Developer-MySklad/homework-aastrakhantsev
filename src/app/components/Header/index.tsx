@@ -1,13 +1,15 @@
-import React from 'react';
+import { React, useContext } from 'react';
+import { useApi } from '../../app.tsx';
 import { default as logo } from '../../assets/logo.svg';
 import { default as plus } from '../../assets/plus.svg';
 
-interface HeaderProps {
-    onAddData: () => void;
-}
+export const Header = () => {
+    const { callForRow } = useApi();
 
-export const Header = (props: HeaderProps) => {
-    const {onAddData } = props;
+    const onAddData = () => {
+	callForRow({}, -1);
+    }
+
     return (
 	<header>
 	    <div className="flex-grow">

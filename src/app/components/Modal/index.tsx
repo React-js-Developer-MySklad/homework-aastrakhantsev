@@ -1,25 +1,23 @@
 import html from './index.html';
-import { useState, useContext } from 'react';
-import { ApiContext } from '../../ApiContext.tsx';
+import { useState, useEffect } from 'react';
 import './styles.css';
-import { DataType } from '../../app.tsx';
+import { DataType, useApi } from '../../app.tsx';
 
-interface IInitialData {
-    index: int;
-    row: DataType;
-}
+export const Modal = () => {
+    const { saveOne, saveRow, showModal, modalVisible, modalState } = useApi();
+    const [name, setName] = useState('');
+    const [inn, setInn] = useState('');
+    const [address, setAddress] = useState('');
+    const [kpp, setKpp] = useState('');
 
-interface ModalProps {
-    initialData: IInitalData;
-}
-
-export const Modal = (props: ModalProps) => {
-    const { saveOne, saveRow, showModal } = useContext(ApiContext);
-    const { initialData } = props;
-    const [name, setName] = useState(initialData.row.name);
-    const [inn, setInn] = useState(initialData.row.inn);
-    const [address, setAddress] = useState(initialData.row.address);
-    const [kpp, setKpp] = useState(initialData.row.kpp);
+    useEffect(() => {
+	if (modalVisible) {
+	    setName(modalState.index < 0 ? '' : modalState.row.name);
+	    setInn(modalState.index < 0 ? '' : modalState.row.inn);
+	    setKpp(modalState.index < 0 ? '' : modalState.row.kpp);
+	    setAddress(modalState.index < 0 ? '' : modalState.row.address);
+	}
+    }, [modalVisible]);
 
     const hideModal =() => {
 	showModal(false)
@@ -40,7 +38,7 @@ export const Modal = (props: ModalProps) => {
     const clickSave = () => {
 	if (validate()) {
 	    let obj : DataType = {
-		id: initialData.row.id,
+		id: modalState.row.id,
 		name: name,
 		inn: inn,
 		address: address,
@@ -49,12 +47,12 @@ export const Modal = (props: ModalProps) => {
 	    
 	    saveOne(obj).then(r => {
 		obj.id = r.id;
-		saveRow(initialData.index, obj);
+		saveRow(modalState.index, obj);
 	    });
 	}
     }
 
-    return  (
+    return  (modalVisible &&
     <div>
     <div id="default-modal" tabIndex="-1" className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div className="relative" style={{width:'416px', margin: 'auto', marginTop: 'calc(50vh - 300px)'}}>
