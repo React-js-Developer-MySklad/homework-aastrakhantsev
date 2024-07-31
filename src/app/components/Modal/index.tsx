@@ -37,10 +37,10 @@ export const Modal = () => {
     }
 
     const clickSave = (values) => {
-	values.id = initialData.row.id;
+	values.id = modalState.row.id;
 	saveOne(values).then(r => {
 	    values.id = r.id;
-	    saveRow(initialData.index, values);
+	    saveRow(modalState.index, values);
 	});
     }
 
@@ -49,7 +49,7 @@ export const Modal = () => {
     <div id="default-modal" tabIndex="-1" className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div className="relative" style={{width:'416px', margin: 'auto', marginTop: 'calc(50vh - 300px)'}}>
         <div className="relative bg-white rounded-lg p-4">
-	    <Form onSubmit={clickSave} validate={validateForm} initialValues={initialData.row}>
+	    <Form onSubmit={clickSave} validate={validateForm} initialValues={modalState.row}>
 	    {({handleSubmit,values}) => (
 	    <form onSubmit={handleSubmit}>
             <div className="flex px-2">
