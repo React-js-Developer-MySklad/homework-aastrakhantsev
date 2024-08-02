@@ -1,5 +1,7 @@
 import html from './index.html';
 import { useState, useEffect } from 'react';
+import { Form, Field } from 'react-final-form';
+import { ApiContext } from '../../ApiContext.tsx';
 import './styles.css';
 import { DataType, useApi } from '../../app.tsx';
 
@@ -23,40 +25,33 @@ export const Modal = () => {
 	showModal(false)
     }
 
-    const validate = () => {
-	if (! /\d{12}/.test(inn)) {
-	    alert("ИНН должен содержать 12 цифр");
-	    return false;
+    const validateForm = (values) => {
+	const errors = {};
+	if (! /^\d{12}$/.test(values.inn)) {
+	    errors.inn = "ИНН должен содержать 12 цифр";
 	}
-	if (! /\d{9}/.test(kpp)) {
-	    alert("КПП должен содержать 9 цифр");
-	    return false;
+	if (! /^\d{9}$/.test(values.kpp)) {
+	    errors.kpp = "КПП должен содержать 9 цифр";
 	}
-	return true;
+	return errors;
     }
 
-    const clickSave = () => {
-	if (validate()) {
-	    let obj : DataType = {
-		id: modalState.row.id,
-		name: name,
-		inn: inn,
-		address: address,
-		kpp: kpp
-	    };
-	    
-	    saveOne(obj).then(r => {
-		obj.id = r.id;
-		saveRow(modalState.index, obj);
-	    });
-	}
+    const clickSave = (values) => {
+	values.id = modalState.row.id;
+	saveOne(values).then(r => {
+	    values.id = r.id;
+	    saveRow(modalState.index, values);
+	});
     }
 
     return  (modalVisible &&
-    <div>
+    <div>           	
     <div id="default-modal" tabIndex="-1" className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div className="relative" style={{width:'416px', margin: 'auto', marginTop: 'calc(50vh - 300px)'}}>
         <div className="relative bg-white rounded-lg p-4">
+	    <Form onSubmit={clickSave} validate={validateForm} initialValues={modalState.row}>
+	    {({handleSubmit,values}) => (
+	    <form onSubmit={handleSubmit}>
             <div className="flex px-2">
                 <button type="button" className="text-gray-400 bg-transparent rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="default-modal" onClick={hideModal}>
                     <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -68,25 +63,42 @@ export const Modal = () => {
             <div className="p-2 text-xl font-semibold text-gray-500">Контрагент</div>
             <div className="p-2">
                 <span>Наименование</span>
-                <input type="text" value={name} onChange={e => setName(e.target.value)}/>
+		<Field name="name" component="input" type="text" />
             </div>
             <div className="p-2">
+		<Field name="inn">
+		{({ input, meta }) => (
+		<>
                 <span>ИНН</span>
-                <input type="text" value={inn} onChange={e => setInn(e.target.value)}/>
+		<input {...input} type="text" />
+		{meta.error && meta.touched && <div className="errorText">{meta.error}</div>}
+		</>
+		)}
+		</Field>
             </div>
             <div className="p-2">
                 <span>Адрес</span>
-                <input type="text" value={address} onChange={e => setAddress(e.target.value)}/>
+		<Field name="address" component="input" type="text" />
             </div>
             <div className="p-2">
+		<Field name="kpp">
+		{({ input, meta }) => (
+		<>
                 <span>КПП</span>
-                <input type="text" value={kpp} onChange={e => setKpp(e.target.value)}/>
+		<input {...input} type="text" />
+		{meta.error && meta.touched && <div className="errorText">{meta.error}</div>}
+		</>
+		)}
+		</Field>
             </div>
 
             <div className="flex p-2">
-                <button type="button" className="text-white bg-blue-700 font-medium rounded-lg text-sm px-2 py-2.5 text-center w-full" onClick={clickSave}>Сохранить</button>
+                <button type="button" className="text-white bg-blue-700 font-medium rounded-lg text-sm px-2 py-2.5 text-center w-full" type="submit">Сохранить</button>
                 <button type="button" className="text-white bg-blue-700 font-medium rounded-lg text-sm px-2 py-2.5 text-center w-full" onClick={hideModal}>Отмена</button>
             </div>
+	    </form>
+	    )}
+	    </Form>
         </div>
     </div>
     </div>
